@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>LOGIN PAGE</title>
+{% endblock %}
+
+<style>
+
+
+
+
+
+
+</style>
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-sm-6">
+
+            <form id="lp"  method="post" class="jumbotron form-group mx-5 p-3 mb-5 rounded">
+                {% csrf_token %}
+
+                {% if messages %}
+                        {% for message in messages %}
+
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                            <span aria-hidden="true">&times;</span>
+                        </div>
+
+                        {% endfor %}
+
+                {% endif %}
+
+                
+                <center><h5>Login to Your Account</h5></center>
+              
+                
+                <i class="fa fa-user"></i>
+                <label>ENTER USERNAME</label>
+                <input class="input-field form-control" type="text" id="un" name="un"  placeholder="Username">
+
+                <br>
+                <i class="fa fa-key"></i>
+                <label>ENTER PASSWORD</label>
+                <input type="password" id="pw" name="pw" class="form-control" placeholder="Password">
+                <br>
+             
+                 <input type="submit" value="LOGIN" class="btn btn-success col-lg-6">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="{% url 'reset-password' %}">Forgotten Password?</a>
+                    
+                        
+
+         
+             
+                 <hr>
+
+                <center>
+                    <a class="btn btn-info btn-lg btn-block" href="{% url 'otp-login-url' %}"> Login with OTP</a>
+                </center>
+                <hr>
+
+                <center>
+                    
+                        <a class="btn btn-warning btn-lg btn-block" href="#">
+                            <i class="fa fa-google"></i>&nbsp Login with Google</a>
+                        <br>
+                        <a class="btn btn-Primary btn-lg btn-block" href="#">
+                            <i class="fa fa-facebook"></i> &nbsp Login with Facebook</a>
+                        
+                
+                </center>
+                    
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock %}
+
+

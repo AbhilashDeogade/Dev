@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>LOGIN PAGE</title>
+{% endblock %}
+
+<style>
+
+
+
+
+
+
+</style>
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-sm-6">
+
+            <form id="lp"  method="post" class="jumbotron form-group mx-5 p-3 mb-5 rounded">
+                {% csrf_token %}
+
+                {% if messages %}
+                        {% for message in messages %}
+
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                            <span aria-hidden="true">&times;</span>
+                        </div>
+
+                        {% endfor %}
+
+                {% endif %}
+
+                
+                <center><h5>Login to Your Account</h5></center>
+                <hr>
+                <br>
+              
+                
+              
+                
+                <label>MOBILE NUMBER</label>
+                <input type="text" name="otp" class="form-control" placeholder="Enter Your 10-digit Mobile Number" required>
+                <br>
+                <h6>You will receive an OTP on this number</h6>
+                <br><br><br>
+             
+                 <input type="submit" value="Get OTP" class="btn btn-success btn-lg btn-block">
+                    
+                        
+
+         
+             
+                
+                    
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock %}
+
+
