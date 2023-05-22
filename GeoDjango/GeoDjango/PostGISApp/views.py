@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import requests
 from .models import Location
@@ -60,27 +61,30 @@ def Temp_view(request):
 
     for city in cities:
 
-
-        resp = requests.get(url.format(city)).json()
-
-        city_weather = {
-                'city':city.city_name,
-                'temperature':resp['properties']['periods'][0]['temperature'],
-                'name':resp['properties']['periods'][0]['name'],
-                'Humidity': resp['properties']['periods'][0]['relativeHumidity']['value'],
-                'icon':  resp['properties']['periods'][0]['icon'],
-        }
-
-        weather_data.append(city_weather)
-
-    #print(weather_data)
+        try:
 
 
+            resp = requests.get(url.format(city)).json()
+
+            city_weather = {
+                    'city':city.city_name,
+                    'temperature':resp['properties']['periods'][0]['temperature'],
+                    'name':resp['properties']['periods'][0]['name'],
+                    'Humidity': resp['properties']['periods'][0]['relativeHumidity']['value'],
+                    'icon':  resp['properties']['periods'][0]['icon'],
+            }
+
+            weather_data.append(city_weather)
+
+        
 
 
-    template_name = 'geoapp/index2.html'
-    context = {'city_weather': city_weather, 'form': form}
-    return render(request, template_name, context)
+            template_name = 'geoapp/index2.html'
+            context = {'city_weather': city_weather, 'form': form}
+            return render(request, template_name, context)
+
+        except requests.exceptions.ConnectionError:
+            return render(request, 'geoapp/nointernet.html')
 
 
 
